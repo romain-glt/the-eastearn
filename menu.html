@@ -6,9 +6,16 @@
   <title>Menu – The Eastern & Oriental</title>
   <link rel="stylesheet" href="style-common.css">
   <link rel="stylesheet" href="style-menu.css">
-
+  <script src="script.js"></script>
 </head>
 <body>
+  <div id="preloader">
+   <div class="loader">
+     <span class="logo-text">The Eastern <span>& Oriental</span></span>
+     <div class="loading-bar"></div>
+     <span class="loading-text">Loading...</span>
+    </div>
+  </div>
   <header class="site-header">
   <div class="container">
     <div class="logo">
@@ -98,20 +105,16 @@
 </section>
 
   </main>
-  <section class="order-section">
+ <section class="order-section">
   <h2>Your Cart</h2>
   <div id="cart-items"></div>
   <div class="cart-total">
     <strong>Total:</strong> <span id="cart-total">0₫</span>
   </div>
-  <button id="checkout-btn">Order Now</button>
-</section>
+ </section>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2025 The Eastern & Oriental. All rights reserved.</p>
-    </div>
-  </footer>
+
+  
   <script>
   const cart = [];
   const cartItemsContainer = document.getElementById("cart-items");
@@ -157,15 +160,51 @@
     });
   });
   }
+  const orderForm = document.getElementById("order-form");
+const orderDetailsInput = document.getElementById("order-details");
+const confirmationMessage = document.getElementById("confirmation-message");
+
+if (orderForm) {
+  orderForm.addEventListener("submit", () => {
+    let message = "New Order:\n";
+    cart.forEach(item => {
+      message += `- ${item.name}: ${item.price.toLocaleString()}₫\n`;
+    });
+    message += `\nTotal: ${cart.reduce((sum, item) => sum + item.price, 0).toLocaleString()}₫`;
+
+    orderDetailsInput.value = message;
+    confirmationMessage.style.display = "block";
+
+    // Optionnel : vider le panier après soumission
+    cart.length = 0;
+    updateCart();
+  });
+}
+
 </script>
-<form id="order-form" action="https://formsubmit.co/romainglachant@gmail.com" method="POST" style="display: none;">
-  <input type="hidden" name="_subject" value="New Order from The Eastern & Oriental">
-  <input type="hidden" name="order-details" id="order-details">
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_template" value="table">
-  <input type="hidden" name="_autoresponse" value="Thank you for your order! We'll confirm it soon.">
+<section class="order-form-section">
+  <h3>Confirm Your Order</h3>
+  <form id="order-form" action="https://formsubmit.co/romainglachant@gmail.com" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="tel" name="phone" placeholder="Phone Number" required />
+    <input type="hidden" name="_subject" value="New Order from The Eastern & Oriental">
+    <input type="hidden" name="order-details" id="order-details" />
 
-</form>
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_autoresponse" value="Thank you! We've received your order and will contact you shortly.">
 
+    <button type="submit" id="send-order-btn">Send Order</button>
+    <p id="confirmation-message" style="display: none; color: green; font-weight: bold; margin-top: 1rem;">
+      ✅ Your order has been sent. Thank you!
+    </p>
+  </form>
+</section>
+
+<footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 The Eastern & Oriental. All rights reserved.</p>
+    </div>
+</footer>
 </body>
 </html>
