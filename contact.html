@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact – The Eastern & Oriental</title>
+  <link rel="stylesheet" href="style-common.css" />
+  <link rel="stylesheet" href="style-contact.css" />
+  <script src="script.js"></script>
+  <link rel="icon" href="favicon.png" type="image/png" />
+</head>
+<body>
+  <div id="preloader">
+   <div class="loader">
+     <span class="logo-text">The Eastern <span>& Oriental</span></span>
+     <div class="loading-bar"></div>
+     <span class="loading-text">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="logo">
+        <h1><span class="outlined">THE EASTERN</span> <span class="accent">& ORIENTAL</span></h1>
+      </div>
+      <nav class="navbar" id="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="menu.html">Menu</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="burger" id="burger">&#9776;</div>
+    </div>
+    
+  </header>
+
+  <!-- Main -->
+  <main>
+    <section class="contact-section">
+      <div class="container">
+        <h2>Contact Us</h2>
+        <p>Have a question, a reservation, or just want to say hello?</p>
+
+        <p><strong>Phone:</strong> <a href="tel:+84987654321">+84 987 654 321</a></p>
+        <p><strong>Visit us:</strong> 
+          <a href="https://www.google.com/maps?q=Hanoi+Vietnam+The+Eastern+and+Oriental" target="_blank" rel="noopener noreferrer">
+            View on Google Maps
+          </a>
+        </p>
+
+        <form action="https://formsubmit.co/your@email.com" method="POST" class="contact-form">
+          <input type="hidden" name="_captcha" value="false">
+          
+          <div class="form-group">
+            <input type="text" name="firstname" placeholder="First Name" required 
+              oninvalid="this.setCustomValidity('Please enter your first name')"
+              oninput="this.setCustomValidity('')">
+            <input type="text" name="lastname" placeholder="Last Name" required 
+              oninvalid="this.setCustomValidity('Please enter your last name')"
+              oninput="this.setCustomValidity('')">
+          </div>
+
+          <input type="email" name="email" placeholder="Email Address" required
+            oninvalid="this.setCustomValidity(this.validity.typeMismatch ? 'Please enter a valid email' : 'Email is required')"
+            oninput="this.setCustomValidity('')">
+
+          <textarea name="message" rows="5" placeholder="Your message..." required
+            oninvalid="this.setCustomValidity('Please write your message')"
+            oninput="this.setCustomValidity('')"></textarea>
+
+          <button type="submit">Send Message</button>
+        </form>
+        <div class="social-links">
+            <h3>Follow us</h3>
+            <div class="icons">
+                <a href="https://www.facebook.com/yourpage" target="_blank" aria-label="Facebook">
+                    <img src="facebook.png" alt="Facebook" />
+                </a>
+                <a href="https://www.instagram.com/yourpage" target="_blank" aria-label="Instagram">
+                    <img src="instagram.png" alt="Instagram" />
+                </a>
+                <a href="https://www.grab.com/vn/" target="_blank" aria-label="Grab">
+                    <img src="grab.svg" alt="Grab" />
+                </a>
+            </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 The Eastern & Oriental. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Script for burger menu -->
+  <script>
+    const burger = document.getElementById('burger');
+    const navMenu = document.getElementById('nav-menu');
+
+    burger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.navbar a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>

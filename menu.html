@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu – The Eastern & Oriental</title>
+  <link rel="stylesheet" href="style-common.css">
+  <link rel="stylesheet" href="style-menu.css">
+
+</head>
+<body>
+  <header class="site-header">
+  <div class="container">
+    <div class="logo">
+      <h1>The Eastern <span>& Oriental</span></h1>
+    </div>
+    <nav class="navbar" id="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="menu.html">Menu</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="burger" id="burger">&#9776;</div>
+  </div>
+</header>
+
+
+
+
+  <main>
+    <section class="intro">
+      <div class="container">
+        <h3>Our Menu</h3>
+        <p>Explore our curated selection of drinks, cakes, and meals served fresh every day.</p>
+      </div>
+    </section>
+
+    <section class="services">
+      <div class="grid">
+        <a class="card menu-drinks" href="#drinks">Drinks</a>
+        <a class="card menu-cakes" href="#cakes">Cakes</a>
+        <a class="card menu-meals" href="#meals">Meals</a>
+        <a class="card menu-specials" href="#specials">Specials</a>
+      </div>
+    </section>
+    <section class="menu-category" id="drinks">
+  <h2>Drinks</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="item-info">
+        <h3>Matcha Latte</h3>
+        <p>45,000₫</p>
+        <button class="add-to-cart" data-name="Matcha Latte" data-price="45000">Add to Cart</button>
+      </div>
+    </div>
+    <!-- Ajoute d'autres boissons ici -->
+  </div>
+</section>
+
+<section class="menu-category" id="cakes">
+  <h2>Cakes</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="item-info">
+        <h3>Chocolate Cake</h3>
+        <p>60,000₫</p>
+        <button class="add-to-cart" data-name="Chocolate Cake" data-price="60000">Add to Cart</button>
+      </div>
+    </div>
+    <!-- Ajoute d'autres gâteaux ici -->
+  </div>
+</section>
+
+<section class="menu-category" id="meals">
+  <h2>Meals</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="item-info">
+        <h3>Chicken Curry</h3>
+        <p>85,000₫</p>
+        <button class="add-to-cart" data-name="Chicken Curry" data-price="85000">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="menu-category" id="specials">
+  <h2>Specials</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="item-info">
+        <h3>Afternoon Tea Set</h3>
+        <p>120,000₫</p>
+        <button class="add-to-cart" data-name="Afternoon Tea Set" data-price="120000">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>
+  <section class="order-section">
+  <h2>Your Cart</h2>
+  <div id="cart-items"></div>
+  <div class="cart-total">
+    <strong>Total:</strong> <span id="cart-total">0₫</span>
+  </div>
+  <button id="checkout-btn">Order Now</button>
+</section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 The Eastern & Oriental. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+  const cart = [];
+  const cartItemsContainer = document.getElementById("cart-items");
+  const cartTotal = document.getElementById("cart-total");
+
+  document.querySelectorAll(".add-to-cart").forEach(button => {
+    button.addEventListener("click", () => {
+      const name = button.dataset.name;
+      const price = parseInt(button.dataset.price);
+      cart.push({ name, price });
+      updateCart();
+    });
+  });
+
+  function updateCart() {
+  cartItemsContainer.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    const itemEl = document.createElement("div");
+    itemEl.classList.add("cart-item");
+
+    itemEl.innerHTML = `
+      <span>${item.name}</span>
+      <span>
+        ${item.price.toLocaleString()}₫ 
+        <button class="remove-item" data-index="${index}" title="Remove item">❌</button>
+      </span>
+    `;
+
+    cartItemsContainer.appendChild(itemEl);
+    total += item.price;
+  });
+
+  cartTotal.textContent = `${total.toLocaleString()}₫`;
+
+  // Ajoute un écouteur de suppression pour chaque bouton ❌
+  document.querySelectorAll(".remove-item").forEach(button => {
+    button.addEventListener("click", () => {
+      const index = parseInt(button.dataset.index);
+      cart.splice(index, 1); // Supprime l'article à cet index
+      updateCart(); // Recharge l'affichage
+    });
+  });
+  }
+</script>
+<form id="order-form" action="https://formsubmit.co/romainglachant@gmail.com" method="POST" style="display: none;">
+  <input type="hidden" name="_subject" value="New Order from The Eastern & Oriental">
+  <input type="hidden" name="order-details" id="order-details">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_autoresponse" value="Thank you for your order! We'll confirm it soon.">
+
+</form>
+
+</body>
+</html>
